@@ -8,7 +8,7 @@
 module.exports = {
 
     attributes: {
-        paypalId: {
+        user_id: {
             type: 'string',
             required: true,
             unique: true
