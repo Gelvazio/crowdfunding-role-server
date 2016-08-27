@@ -28,8 +28,9 @@ module.exports.policies = {
 
   '*': true,
   UserController: {
-      '*': 'isLoggedIn',
-      create: true
+    '*': true
+    //   '*': 'isLoggedIn',
+    //   create: true
   }
 
   /***************************************************************************

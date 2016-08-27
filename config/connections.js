@@ -57,10 +57,12 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   testMongoDb: {
+    // user: 'admin',
+    // passport: 'grana123',
     adapter: 'sails-mongo',
     host: 'localhost',
     port: 27017,
-    database: 'test_db' //optional
+    database: 'role_db' //optional
   },
 
   /***************************************************************************
