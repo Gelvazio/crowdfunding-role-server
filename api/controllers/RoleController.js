@@ -29,8 +29,7 @@ module.exports = {
 		obj.when = req.param('when');
 		obj.cost = req.param('cost');
 		obj.coordinator = coordinator;
-		console.log(req.param('members'));
-		members = req.param('members').map((item) => {return item.toString();});
+		members = JSON.parse(req.param('members')).map((item) => {return item.toString();});
 		console.log(members);
 		User.find({user_id: JSON.parse(members)}).exec((err, users) => {
 			if(err){
