@@ -36,12 +36,12 @@ passport.deserializeUser(function (id, done) {
 passport.use(new FacebookStrategy({
     clientID: "290802837960601",
     clientSecret: "60d89107edeebd4ddcf64823adfcbfdd",
-    // callbackURL: "http://127.0.0.1:1337/user/facebook/callback"
-    callbackURL: "http://ec2-52-32-23-74.us-west-2.compute.amazonaws.com:1337/user/facebook/callback"
+    callbackURL: "http://127.0.0.1:1337/user/facebook/callback"
+    // callbackURL: "http://ec2-52-32-23-74.us-west-2.compute.amazonaws.com:1337/user/facebook/callback"
   }, function (accessToken, refreshToken, profile, done) {
 
     findByFacebookId(profile.id, function (err, user) {
-      console.log(profile);
+    //   console.log(profile);
       // Create a new User if it doesn't exist yet
       if (!user) {
         User.create({

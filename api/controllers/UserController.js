@@ -23,7 +23,7 @@ module.exports = {
 	},
 
 	'facebook': function (req, res, next) {
-		passport.authenticate('facebook', { scope: ['email', 'user_about_me']},
+		passport.authenticate('facebook', { scope: ['email', 'user_about_me', 'user_friends']},
 		function (err, user) {
 			req.logIn(user, function (err) {
 				if(err) {
@@ -31,6 +31,7 @@ module.exports = {
 					req.session.flash = 'There was an error';
 					res.redirect('user/login');
 				} else {
+					console.log("Facebook call");
 					req.session.user = user;
 					res.redirect('/user/dashboard');
 				}
@@ -39,6 +40,7 @@ module.exports = {
 	},
 
 	'facebook/callback': function (req, res, next) {
+		console.log("callback call");
 		passport.authenticate('facebook',
 		function (req, res) {
 		 	res.redirect('/user/dashboard');
