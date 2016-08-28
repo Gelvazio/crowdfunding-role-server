@@ -29,8 +29,9 @@ module.exports = {
 		obj.when = req.param('when');
 		obj.cost = req.param('cost');
 		obj.coordinator = coordinator;
-		console.log(req.param('members'));
-		User.find({user_id: JSON.parse(req.param('members'))}).exec((err, users) => {
+		members = req.param('members').map((item) => item.toString());
+		console.log(members);
+		User.find({user_id: JSON.parse(members)}).exec((err, users) => {
 			if(err){
 				res.status(400);
 				return res.send("Error creating users for role: " + err);
