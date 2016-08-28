@@ -41,7 +41,7 @@ passport.use(new FacebookStrategy({
   }, function (accessToken, refreshToken, profile, done) {
 
     findByFacebookId(profile.id, function (err, user) {
-    //   console.log(profile);
+      console.log(profile);
       // Create a new User if it doesn't exist yet
       if (!user) {
         User.create({
