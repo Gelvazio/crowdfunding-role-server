@@ -31,11 +31,12 @@ module.exports = {
 		obj.coordinator = coordinator;
 		members = JSON.parse(req.param('members')).map((item) => {return item.toString();});
 		console.log(members);
-		User.find({user_id: JSON.parse(members)}).exec((err, users) => {
+		User.find({user_id: members}).exec((err, users) => {
 			if(err){
 				res.status(400);
 				return res.send("Error creating users for role: " + err);
 			}
+			console.log(users);
 			Role.create(obj).exec((err, role) => {
 				if(err){
 					res.status(400);
