@@ -1,10 +1,10 @@
 passport = require("passport");
 
 module.exports = {
-  login: function(req, res) {
+  login: function(req, res, next) {
     token = req.param('access_token');
     console.log(token);
-    passport.authenticate(token, function(error, user, info) {
+    passport.authenticate('facebook-token', function(error, user, info) {
         req.logIn(user, function (err) {
             if(err) {
                 console.log("There was an error: " + err);
@@ -18,7 +18,7 @@ module.exports = {
             }
         });
       res.ok();
-    })(req, res);
+  })(req, res, next);
   },
 
   logout: function(req, res){
