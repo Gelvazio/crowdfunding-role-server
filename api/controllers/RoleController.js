@@ -46,7 +46,9 @@ module.exports = {
 				for(var user of users){
 					payments.push({payment_user: user, payment_role: role, value: 0});
 				}
+				console.log(payments);
 				Payment.create(payments).exec((err, created_payments) => {
+					console.log(created_payments);
 					if(err){
 						res.status(400);
 						return res.send("Error creating payment: " + err);
