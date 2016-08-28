@@ -13,6 +13,10 @@ module.exports = {
             required: true,
             unique: true
         },
+        name: {
+            type: 'string',
+            required: true
+        },
         coordinated_events: {
             collection: 'role',
             via: 'coordinator'
