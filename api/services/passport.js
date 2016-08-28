@@ -1,5 +1,5 @@
-var passport = require('passport'),
-  FacebookStrategy = require('passport-facebook').Strategy;
+var passport = require('passport');
+var FacebookTokenStrategy = require('passport-facebook-token');
 
 function findById(id, fn) {
   User.findOne(id, function (err, user) {
@@ -33,43 +33,54 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use(new FacebookStrategy({
+
+passport.use(new FacebookTokenStrategy({
     clientID: "290802837960601",
-    clientSecret: "60d89107edeebd4ddcf64823adfcbfdd",
-    callbackURL: "http://127.0.0.1:1337/user/facebook/callback"
-    // callbackURL: "http://ec2-52-32-23-74.us-west-2.compute.amazonaws.com:1337/user/facebook/callback"
-  }, function (accessToken, refreshToken, profile, done) {
-
-    findByFacebookId(profile.id, function (err, user) {
-    //   console.log(profile);
-      // Create a new User if it doesn't exist yet
-      if (!user) {
-        User.create({
-
-          user_id: profile.id,
-          name: profile.displayName
-
-          // You can also add any other data you are getting back from Facebook here
-          // as long as it is in your model
-
-      }, function (err, user) {
-          if (user) {
-            return done(null, user, {
-              message: 'Logged In Successfully'
-            });
-          } else {
-            return done(err, null, {
-              message: 'There was an error logging you in with Facebook'
-            });
-          }
-        });
-
-      // If there is already a user, return it
-      } else {
-        return done(null, user, {
-          message: 'Logged In Successfully'
-        });
-      }
+    clientSecret: "60d89107edeebd4ddcf64823adfcbfdd"
+  }, function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({user_id: profile.id}, function (error, user) {
+      return done(error, user);
     });
   }
 ));
+
+// passport.use(new FacebookStrategy({
+//     clientID: "290802837960601",
+//     clientSecret: "60d89107edeebd4ddcf64823adfcbfdd",
+//     callbackURL: "http://127.0.0.1:1337/user/facebook/callback"
+//     // callbackURL: "http://ec2-52-32-23-74.us-west-2.compute.amazonaws.com:1337/user/facebook/callback"
+//   }, function (accessToken, refreshToken, profile, done) {
+//
+//     findByFacebookId(profile.id, function (err, user) {
+//     //   console.log(profile);
+//       // Create a new User if it doesn't exist yet
+//       if (!user) {
+//         User.create({
+//
+//           user_id: profile.id,
+//           name: profile.displayName
+//
+//           // You can also add any other data you are getting back from Facebook here
+//           // as long as it is in your model
+//
+//       }, function (err, user) {
+//           if (user) {
+//             return done(null, user, {
+//               message: 'Logged In Successfully'
+//             });
+//           } else {
+//             return done(err, null, {
+//               message: 'There was an error logging you in with Facebook'
+//             });
+//           }
+//         });
+//
+//       // If there is already a user, return it
+//       } else {
+//         return done(null, user, {
+//           message: 'Logged In Successfully'
+//         });
+//       }
+//     });
+//   }
+// ));
