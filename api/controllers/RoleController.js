@@ -16,6 +16,7 @@ check_params = function(req){
 
 module.exports = {
 	create: (req, res) => {
+		console.log("Called create " + req.session.user);
 		coordinator = req.session.user;
 		if(!check_params(req)){
 			res.status = 400;
