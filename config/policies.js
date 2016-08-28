@@ -28,9 +28,11 @@ module.exports.policies = {
 
   '*': true,
   UserController: {
-    '*': true
-    //   '*': 'isLoggedIn',
-    //   create: true
+    // '*': true
+      '*': 'isLoggedIn',
+      login: true,
+      facebook: true,
+      'facebook/callback': true
   }
 
   /***************************************************************************
