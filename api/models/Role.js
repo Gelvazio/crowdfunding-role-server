@@ -8,10 +8,10 @@
 module.exports = {
 
     attributes: {
-        name: {
-            type: 'string',
+        role_id: {
+            type: 'integer',
             required: true,
-            unique: true
+            unique: true,
         },
         where: {
             type: 'string',

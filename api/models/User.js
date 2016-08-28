@@ -15,7 +15,7 @@ module.exports = {
         },
         name: {
             type: 'string',
-            //required: true
+            required: true
         },
         coordinated_events: {
             collection: 'role',
