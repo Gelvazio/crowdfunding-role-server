@@ -20,7 +20,6 @@ module.exports = {
 					res.status = 400;
 					return res.send("Error updating payment");
 				}
-				res.send("updated");
 			});
 		});
 
