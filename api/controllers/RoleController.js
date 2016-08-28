@@ -29,7 +29,7 @@ module.exports = {
 		obj.when = req.param('when');
 		obj.cost = req.param('cost');
 		obj.coordinator = coordinator;
-		members = req.param('members').map((item) => {item.toString();});
+		members = req.param('members').map((item) => {return item.toString();});
 		console.log(members);
 		User.find({user_id: JSON.parse(members)}).exec((err, users) => {
 			if(err){
@@ -52,6 +52,21 @@ module.exports = {
 					}
 					return res.send("Inserted");
 				});
+			});
+		});
+	},
+
+	getByUser: function(req, res){
+		user_id = req.param('id');
+		role_ids = [];
+		User.findOne({user_id: user_id}).populate('payments').exec((err, user) => {
+			for(var payment of user.payments){
+				role_ids.push(payment.payment_role);
+			}
+			console.log(role_ids);
+			Role.find({id: role_ids}).exec((err, roles) => {
+				console.log(users);
+				res.send(roles);
 			});
 		});
 	}
